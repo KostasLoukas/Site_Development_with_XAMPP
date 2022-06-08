@@ -19,4 +19,4 @@ Each of them have the roles user, moderator and administrator, along with the co
 Note: this site is written in Greek.
 
 ![1](https://user-images.githubusercontent.com/105225491/172657137-d800ecf4-d640-46ae-b53d-ecd1f7258d6e.png)
-Created By [Loukas Konstantinos](https://github.com/KostasLoukas), [Giannis Benakidis](https://github.com/GBenakidis) and [Giwrgos Kapelos](https://github.com/GiwrgosKapelos)
+Created by: [Loukas Konstantinos](https://github.com/KostasLoukas), [Giannis Benakidis](https://github.com/GBenakidis) and [Giwrgos Kapelos](https://github.com/GiwrgosKapelos)
