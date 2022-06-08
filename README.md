@@ -1,6 +1,6 @@
 # Site Development with XAMPP
 
-This site was developed entirely from scratch (only the CSS was used as-is), with the help of our trusty Notepad++. :)
+This site was developed entirely from scratch (only the CSS was used as-is), with the help of our trustworthy Notepad++. :)
 To run this as intended, you will need to have XAMPP installed in your machine and drag-'n'-drop all of the files (except from
 the sorting_algorithms_db.sql one) of this repository into the htdocs folder of your XAMPP's installation directory. Then,
 you will need to set up XAMPP to parse html documents as php ones and you can do that by following this simple guide:
