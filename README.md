@@ -15,3 +15,7 @@ a with password 1,
 mod with password mod and
 admin with password admin.
 Each of them have the roles user, moderator and administrator, along with the corresponding privileges.
+
+Note: this site is written in Greek.
+
+![1](https://user-images.githubusercontent.com/105225491/172657137-d800ecf4-d640-46ae-b53d-ecd1f7258d6e.png)
