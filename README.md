@@ -8,7 +8,7 @@ https://electrictoolbox.com/apache-parse-html-as-php/
 You will then need to start Apache and MySQL through the XAMPP tool and go to localhost/phpmyadmin at
 your browser and create a database with the name sorting_algorithms_db. Next, you will need to select it and within it
 import the sorting_algorithms_db.sql file which contains the necessary tables (all_questions_db, question_requests, registered_users and tests).
-Finally, you can click the index.html file which is located into .../xampp/htdocs/ directory and browse away at it!
+Finally, you can go to the localhost/index.html page and browse away at it!
 
 It should be mentioned here that the saved (registered) users are: 
 a with password 1,
