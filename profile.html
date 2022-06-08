@@ -1,0 +1,718 @@
+﻿<!DOCTYPE html>
+
+<?php
+	//session_start();
+	include("login.php");
+  ?>
+
+<html lang="en">
+	<style>
+	input[type=text], select
+	{
+	 width: 100%;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  resize: vertical;
+	}
+	
+	input[type=email], select
+	{
+	 width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+	}
+	
+	
+	input[type=password], select
+	{
+	 width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+	}
+	
+	input[type=date], select
+	{
+	 width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+	}
+
+	input[type=submit] {
+	width: 100%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	}
+
+	input[type=submit]:hover {
+	  background-color: #45a049;
+	}
+
+	.col-25 {
+	  float: left;
+	  width: 25%;
+	  margin-top: 6px;
+	}
+
+	.col-75 {
+	  float: left;
+	  width: 75%;
+	  margin-top: 6px;
+	}
+	
+	.col-50 {
+	  float: left;
+	  width: 50%;
+	  margin-top: 6px;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+
+	label {
+	  padding: 12px 12px 12px 0;
+	  display: inline-block;
+	}
+	
+	@media screen and (max-width: 600px) {
+  .col-25, .col-75, .col-50 input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+</style>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  
+}
+th, td {
+  padding: 5px;
+  text-align: center;    
+}
+</style>
+
+
+  <head>
+	<script src="https://kit.fontawesome.com/d4e63b1e35.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αλγόριθμοι Ταξινόμησης</title>
+    <link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="styles/alerts.css">
+  </head>
+
+  <body onload="onload()">
+    <div class="col-12 col-s-12 navbar">
+      <div class="container">
+        <a class="logo" href="index.html">Αλγόριθμοι Ταξινόμησης</a>
+        <img id="mobile-cta" class="mobile-menu" src="media/images_used/menu.svg" alt="Open navigation menu">
+
+        <nav>
+          <img id="mobile-exit" class="mobile-menu-exit" src="media/images_used/exit.svg" alt="Close navigation menu">
+          <ul class="left-nav">
+            <li><a href="index.html">ΑΡΧΙΚΗ</a></li>
+            <li><a href="basics.html">ΠΕΡΙΓΡΑΦΗ</a></li>
+            <li><a href="more.html">ΠΕΡΙΣΣΟΤΕΡΑ</a></li>
+            <li><a href="quiz.html">QUIZ</a></li>
+
+						<?php
+							if (isset($_SESSION['login_user']))
+							{
+								echo '<li><a href="extraquiz.html">EXTRA QUIZ!</a></li>';
+							}
+						?>
+					</ul>
+					<?php
+						if (isset($_SESSION['login_user']))
+						{
+							print	'<ul class="right-nav">';
+							print		'<li class="current"><a href="profile.html">ΠΡΟΦΙΛ</a></li>';
+							print		'<li><img src="' . $_SESSION['profile_image'] . '" alt="Profile Image" width="50px" height="50px"></li>';
+							print		'<li><a href="logout.php">ΑΠΟΣΥΝΔΕΣΗ</a></li>';
+							print   	'<div><li><i class="fa-fw fas fa-2x fa-adjust icon" onclick="DarkMode()"></i></li></div>'; 
+							print	'</ul>';
+						}
+						else
+						{
+							print	'<ul class="right-nav">';
+							print		'<li><a href="login.html">ΕΙΣΟΔΟΣ</a></li>';
+							print		'<li><a href="sign-up.html">ΕΓΓΡΑΦΗ</a></li>';
+							print   	'<div><li><i class="fa-fw fas fa-2x fa-adjust icon" onclick="DarkMode()"></i></li></div>'; 
+							print	'</ul>';
+						}
+					?>
+        </nav>
+      </div>
+    	</div>
+
+		<!-- Warning of successful change of profile details -->
+		<?php 
+			if (isset($_SESSION['reg_success']))
+			{
+				if ($_SESSION['reg_success']==8)
+				{
+					echo '<div class="alert info">'  
+							. $_SESSION['reg_message'] .
+							'<span class="closebtn">&times;</span>
+						</div>';
+						
+					unset($_SESSION['reg_success']);
+				}
+				else if($_SESSION['reg_success']==7)
+				{
+					echo '<div class="alert">'  
+							. $_SESSION['reg_message'] .
+							'<span class="closebtn">&times;</span>
+						</div>';
+						
+					unset($_SESSION['reg_success']);
+				}
+			}
+		?>
+	
+		<div class="col-25">
+		</div>
+	
+		<div class="col-50" id="Body1"> <!--id για το Dark Mode-->
+			<section class="under-pane" align="center">
+				<div id="Text"> <!--Άσπρα γράμματα για Dark Mode-->
+					<p style="font-size:30px"><strong>Στοιχεία προφίλ</strong></p>
+						<!-- Adding known values from users current session -->
+						<?php
+							print '<p><img src="' . $_SESSION['profile_image'] . '" alt="Profile Image" width="200vw" height="200vw"></p>';
+							print '<p><strong>Όνομα: </strong>' . $_SESSION['name'] . '</p>';
+							print '<p><strong>Επίθετο: </strong>' . $_SESSION['surname'] . '</p>';
+							print '<p><strong>Ημερομηνία Γέννησης: </strong>' . $_SESSION['date_of_birth'] . '</p>';
+							print '<p><strong>Φύλο: </strong>' . $_SESSION['gender'] . '</p>';
+							print '<p><strong>Email: </strong>' . $_SESSION['email'] . '</p>';
+							print '<p><strong>Όνομα Χρήστη: </strong>' . $_SESSION['login_user'] . '</p>';
+							print '<p><strong>Κωδικός: </strong>' . $_SESSION['password'] . '</p>';
+							print '<p><strong>Ρόλος: </strong>' . $_SESSION['role'] . '</p>'; 
+						?>
+				</div>
+			</section>
+		</div>
+	
+		<div class="col-25">
+		</div>
+
+	
+		<div class="row" id="Body2"> <!--id για το Dark Mode-->
+			<section class="under-pane">
+					<p style="font-size:30px; clear:left;"><strong>Αλλαγή στοιχείων προφίλ</strong></p>
+					
+					<!-- Values from user, they get added to POST and we are transported to "change_account_details.php" -->
+					<form name="change_account_details" id="change_account_details" method="POST" action="change_account_details.php" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-25"> 
+								<label for="name">Όνομα:</label>
+							</div>
+							<div class="col-75">
+								<INPUT type="text" name="name" id="name" placeholder="e.g. Giannis"> 
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="surname">Επίθετο:</label>
+							</div>
+							<div class="col-75">
+								<INPUT type="text" name="surname" id="surname" placeholder="e.g. Loukas"> <BR>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="date_of_birth">Ημ. γέννησης:</label>
+							</div>
+							<div class="col-75">
+								<input type="date" id="date_of_birth" name="date_of_birth" max="2021-05-15"> <BR>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="gender">Φύλο:</label>
+							</div>
+							<div class="col-75">
+								<select name="gender" id="gender">
+									<option value="--">--
+									<option value="Δεν_θέλω_να_αναφέρω">Δεν θέλω να αναφέρω
+									<option value="Αντρας">Άντρας
+									<option value="Γυναικα">Γυναίκα
+									<option value="Bigender">Bigender
+									<option value="Nurtrois">Nurtrois
+									<option value="Agender">Agender
+									<option value="Demiboy">Demiboy
+									<option value="Demigirl">Demigirl
+									<option value="Third_gender">Third Gender
+									<option value="Genderqueen">Genderqueen
+									<option value="Pangender">Pangender
+									<option value="Αλλο">Άλλο
+								</select><BR>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="email">Email:</label>
+							</div>
+							<div class="col-75">
+								<INPUT pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" type="email" name="email" id="email" placeholder="e.g. papel@somewhere.com" size="40"> <BR>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="password">Κωδικός:</label>
+							</div>
+							<div class="col-75">
+								<INPUT type="password" name="password" id="password" size="20" maxlength="50"> <BR>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="confirm_password">Επιβεβαίωση Κωδικού:</label>
+							</div>
+							<div class="col-75">
+								<INPUT type="password" name="confirm_password" id="confirm_password" size="20" maxlength="50"> <BR>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-25">
+								<label for="profile_image">Φωτογραφία προφίλ:</label>
+							</div>
+							<div class="col-75">
+								<INPUT type="file" name="profile_image" id="profile_image"> <BR>
+							</div>
+						</div>
+						
+						
+						<INPUT class="button button2" type="submit" name="update_account" id="update_account" value="Αποθήκευση Αλλαγών"><BR>
+					</form>
+			</section>
+		</div>
+	
+		<div class="row" id="Body3"> <!--id για το Dark Mode-->
+			<section class="under-pane">
+
+				<p style="font-size:30px; clear:left;"><strong>Πρότεινε ερώτηση</strong></p>
+				<p style="color:red; font-size:18px">*Οι πιθανές απαντήσεις πρέπει να χωρίζονται με κόμμα!</p>
+
+				<!-- Values from user, they get added to POST and we are transported to "add_q.php" -->
+				<form name="add_q" id="add_q" method="POST" action="add_q.php" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-25"> 
+							<label for="question">Ερώτηση:</label>
+						</div>
+						<div class="col-75">
+							<INPUT type="text" name="question" id="question" placeholder="My name is:"> 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-25"> 
+							<label for="poss_ans">Πιθανές απαντήσεις:</label>
+						</div>
+						<div class="col-75">
+							<INPUT type="text" name="poss_ans" id="poss_ans" placeholder="A. Huh?, B. What?, C.Chika-chika, D.Slim Shady"> 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-25"> 
+							<label for="correct_ans">Σωστή απάντηση:</label>
+						</div>
+						<div class="col-75">
+							<INPUT type="text" name="correct_ans" id="correct_ans" placeholder="D"> 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-25">
+							<label for="diff">Δυσκολία:</label>
+						</div>
+						<div class="col-75">
+							<select name="diff" id="diff">
+								<option value="--">--
+								<option value="easy">Εύκολη
+								<option value="medium">Μέτρια
+								<option value="hard">Δύσκολη
+							</select><BR>
+						</div>
+					</div>
+
+					<INPUT class="button button2" type="submit" name="add_to_queue" id="add_to_queue" value="Προσθήκη στην ουρά αναμονής"><BR>
+				</form>
+			</section>
+		</div>
+
+	
+		<div class="row" id="Body4"> <!--id για το Dark Mode-->
+			<div class="col-50" align="center">
+
+				<!-- Only admins have the permission for the function -->
+				<!-- Values from user, they get added to POST and we are transported to "changerole.php" -->
+				<?php
+					if (isset($_SESSION['login_user']) && $_SESSION['role']=="administrator")
+					{
+						print '<p style="font-size:26px"><b>Αλλαγή Ρόλου Χρήστη</b></p>';
+						echo '<form name="change_role" id="change_role" method="POST" action="changerole.php">
+									<div class="col-50" align="center">
+										<p>Πληκτρολογήστε το όνομα χρήστη εδώ:</p>
+										<input type="text" name="username" id="username" size="30">
+									</div>
+									
+									<div class="col-50" align="center">
+										<p>Πληκτρολογήστε το νέο ρόλο του χρήστη εδώ:</p>
+										<input type="text" name="role" id="role" size="30">
+									</div>
+									
+									<input style="background-color:orange;" type="submit" name="submit" id="submit" value="Αλλαγή ρόλου χρήστη">
+									</form>';
+					}
+				?>
+			</div>
+		
+			<div class="col-50" align="center" id="Body5"> <!--id για το Dark Mode-->
+				<div>
+					
+					<!-- Only admins have the permission for the function -->
+					<!-- By clinking the "Εμφάνιση Χρηστών" button, showUsers function gets activated -->
+					<?php 
+					if (isset($_SESSION['login_user']) && $_SESSION['role']=="administrator")
+					{
+						print '<p style="font-size:22px"><b>Διαγραφή Χρήστη από το σύστημα</b></p>';
+						print '<input class="button button2" style="margin-bottom:18px;" type="button" name="show_users" id="show_users" value="Εμφάνιση Χρηστών" onclick="showUsers()"><br>';
+					}
+					?>
+				</div>
+				
+				<div name="users" id="users">
+				</div>
+			</div>
+
+			<div class="row" id="Body6"> <!--id για το Dark Mode-->
+				<div class="col-25">
+				</div>
+				
+				<div class="col-50" align="center">
+					
+					<p style="font-size:30px; clear:left;"><strong>Ιστορικό των Τεστς (EXTRA QUIZ)</strong></p>
+
+					<!-- By clinking the "Εμφάνιση Ιστορικού" button, showTests function gets activated -->
+					<input class="button button1" type="button" name="show_tests" id="show_tests" value="Εμφάνιση Ιστορικού" onclick="showTests()">
+
+					<div name="tests" id="tests">
+					</div>
+				</div>
+				
+				<div class="col-25">
+				</div>
+			</div>
+
+			<div class="col-100" align="center" id="Body7"> <!--id για το Dark Mode-->
+				<div>
+
+					<!-- Only admins and mods have the permission for the function -->
+					<!-- By clinking the "Εμφάνιση Ερωτήσεων" button, showQuestions function gets activated -->
+					<?php
+					if (isset($_SESSION['login_user']) && ($_SESSION['role']=="administrator" || $_SESSION['role']=="moderator"))
+					{
+						print '<p style="font-size:30px; clear:left;"><strong>Λίστα ερωτήσεων που βρίσκονται στην αναμονή:</strong></p>';
+						print '<input class="button button1" type="button" name="show_questions" id="show_questions" value="Εμφάνιση Ερωτήσεων" onclick="showQuestions()"><br><br>';
+					}
+					?>		
+				</div>
+
+				<div name="showquestions" id="showquestions">
+				</div>
+			</div>
+			
+			
+			
+			<div class="col-12 col-s-12 footer">
+				<div class="footer-bottom">
+					&copy; Copyright 2021 | MpenakidisLoukas Corpo. | All Rights Reserved
+				</div>
+			</div>
+
+			<div> <i id="myBtn" class="fas fa-4x fa-angle-double-up" style="font-size:30px" onclick="topFunction()"></i></div> <!--Το κουμπί του Back Top-->
+
+			<!--Το responsive navigation bar-->
+			<script>
+				const mobileBtn = document.getElementById('mobile-cta');
+				nav = document.querySelector('nav');
+				mobileBtnExit = document.getElementById('mobile-exit');
+
+				mobileBtn.addEventListener('click', ()=> {
+					nav.classList.add('menu-btn');
+				})
+				mobileBtnExit.addEventListener('click', ()=> {
+					nav.classList.remove('menu-btn');
+				})
+			</script>
+		</div>
+
+		<!-- Fields "Password" and "Confirmed passowrd" must match!-->
+		<script>
+			var password = document.getElementById("password");
+			var confirm_password = document.getElementById("confirm_password");
+
+			function validatePassword() {
+				if(password.value != confirm_password.value) {
+					confirm_password.setCustomValidity("Passwords don't match!");
+				} 
+				else {
+					confirm_password.setCustomValidity('');
+				}
+			}
+
+			password.onchange = validatePassword;
+			confirm_password.onkeyup = validatePassword;
+		</script>
+		
+		<!-- Close warning to change user data -->
+		<script>
+			var close = document.getElementsByClassName("closebtn");
+			var i;
+
+			for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+					var div = this.parentElement;
+					div.style.opacity = "0";
+					setTimeout(function(){ div.style.display = "none"; }, 600);
+				}
+			}
+		</script>
+		
+		<!-- Shows registered users -->
+		<script>
+			function showUsers()
+			{
+			
+				if(window.XMLHttpRequest)
+				{
+					xmlhttp = new XMLHttpRequest ( );
+				} // for "normal" browsers...
+				else
+				{
+					xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");
+				} // for IE6, IE5
+				
+				xmlhttp.onreadystatechange = function()
+				{
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+					{
+						document.getElementById("users").innerHTML = xmlhttp.responseText;
+					}
+				}
+				// allows us to print everything from "showusers.php" under "<div name="users" id="users">"
+				xmlhttp.open("GET","showusers.php", true);
+				xmlhttp.send();
+				
+			}
+		</script>
+		
+		<!-- Displays the questions to approve / reject -->
+		<script>
+			function showQuestions()
+			{
+			
+				if(window.XMLHttpRequest)
+				{
+					xmlhttp = new XMLHttpRequest ( );
+				} // for "normal" browsers...
+				else
+				{
+					xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");
+				} // for IE6, IE5
+				
+				xmlhttp.onreadystatechange = function()
+				{
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+					{
+						document.getElementById("showquestions").innerHTML = xmlhttp.responseText;
+					}
+				}
+				// allows us to print everything from "showquestions.php" under "<div name="showquestions" id="showquestions">"
+				xmlhttp.open("GET","showquestions.php", true);
+				xmlhttp.send();
+				
+			}
+		</script>
+			
+		<!-- Displays test history -->
+		<script>
+			function showTests()
+			{
+			
+				if(window.XMLHttpRequest)
+				{
+					xmlhttp = new XMLHttpRequest ( );
+				} // for "normal" browsers...
+				else
+				{
+					xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");
+				} // for IE6, IE5
+				
+				xmlhttp.onreadystatechange = function()
+				{
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+					{
+						document.getElementById("tests").innerHTML = xmlhttp.responseText;
+					}
+				}
+				// allows us to print everything from "showtests.php" under "<div name="tests" id="tests">"
+				xmlhttp.open("GET","showtests.php", true);
+				xmlhttp.send();
+				
+			}
+		</script>
+			
+		
+			
+		<!-- Hides registered users every time the button is pressed "Απόκρυψη Εγγεγραμένων Χρηστών" -->
+		<script>
+			function hideUsers() {
+				document.getElementById("users").innerHTML = "";
+			}
+		</script>
+
+		<!-- Dark Mode-->
+		<script>
+    
+			function DarkMode() {
+			  const wasDarkmode = localStorage.getItem('darkmode') === 'true';
+			  localStorage.setItem('darkmode', !wasDarkmode);
+		
+			  const element = document.getElementById("Body1");
+			  const element2 = document.getElementById("Text");
+			  const element3 = document.getElementById("Body2");
+			  const element4 = document.getElementById("Body3");
+			  const element5 = document.getElementById("Body4");
+			  const element6 = document.getElementById("Body5");
+			  const element7 = document.getElementById("Body6");
+			  const element8 = document.getElementById("Body7");
+
+			  element.classList.toggle("dark-mode", !wasDarkmode);
+			  element2.classList.toggle("dark-mode", !wasDarkmode);
+			  element3.classList.toggle("dark-mode", !wasDarkmode);
+			  element4.classList.toggle("dark-mode", !wasDarkmode);
+			  element5.classList.toggle("dark-mode", !wasDarkmode);
+			  element6.classList.toggle("dark-mode", !wasDarkmode);
+			  element7.classList.toggle("dark-mode", !wasDarkmode);			  
+			  element8.classList.toggle("dark-mode", !wasDarkmode);
+
+
+			  /*const element = document.body;
+			  element.classList.toggle('dark-mode', !wasDarkmode);*/
+			 } 
+		
+			  function onload() {
+			  document.getElementById("Body1").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Text").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body2").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body3").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body4").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body5").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body6").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body7").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+			  document.getElementById("Body8").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+
+			  //const element3 = document.getElementById("Dnav");
+			  //element3.classList.toggle("darknav");
+			  }
+			
+		</script>
+		  
+		<style>
+		
+		   .dark-mode 
+		   {
+			 background-color: black;
+			 color: white;
+		   }
+			.icon 
+			{
+			cursor: pointer;
+			padding-top:13px;
+			padding-left:10px;
+		   }
+		
+			  /* .darknav{
+				background-color:grey;
+				color: white;
+			  }*/
+		
+		  	/* Κουμπί για το Back Top*/    
+		  	#myBtn 
+			{
+				display: none; 
+				position: fixed; 
+				bottom: 20px;
+				right: 30px; 
+				z-index: 99; 
+				border: none; 
+				outline: none; 
+				background-color: grey; 
+				color: white; 
+				cursor: pointer; 
+				padding: 15px; 
+				border-radius: 10px; 
+				font-size: 18px; 
+			}
+		
+			#myBtn:hover 
+			{
+				background-color: #555; 
+			}
+		</style>
+		
+		<!--Για το Back to Top-->
+		<script>
+			//Get the button:
+			mybutton = document.getElementById("myBtn");
+		
+		   // When the user scrolls down 20px from the top of the document, show the button
+			window.onscroll = function() {scrollFunction()};
+		
+			function scrollFunction() {
+			  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+			  } else {
+				mybutton.style.display = "none";
+			  }
+			}
+		
+		// When the user clicks on the button, scroll to the top of the document
+			function topFunction() 
+			{
+			  document.body.scrollTop = 0; // For Safari
+			  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+			}
+		</script>
+  	</body>
+</html>

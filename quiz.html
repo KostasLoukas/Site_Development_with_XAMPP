@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<?php
+	//session_start();
+	include("login.php");
+?>
+
+<html lang="en">
+  <head>
+	<script src="https://kit.fontawesome.com/d4e63b1e35.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αλγόριθμοι Ταξινόμησης</title>
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+
+  <body onload="onload()">
+    <div class="col-12 col-s-12 navbar">
+      <div class="container">
+        <a class="logo" href="index.html">Αλγόριθμοι Ταξινόμησης</a>
+
+        <img id="mobile-cta" class="mobile-menu" src="media/images_used/menu.svg" alt="Open navigation menu">
+
+        <nav>
+          <img id="mobile-exit" class="mobile-menu-exit" src="media/images_used/exit.svg" alt="Close navigation menu">
+          <ul class="left-nav">
+            <li><a href="index.html">ΑΡΧΙΚΗ</a></li>
+            <li><a href="basics.html">ΠΕΡΙΓΡΑΦΗ</a></li>
+            <li><a href="more.html">ΠΕΡΙΣΣΟΤΕΡΑ</a></li>
+            <li class="current"><a href="quiz.html">QUIZ</a></li>
+						<?php
+							if (isset($_SESSION['login_user']))
+							{
+								echo '<li><a href="extraquiz.html">EXTRA QUIZ!</a></li>';
+							}
+						?>
+          </ul>
+
+          <?php
+						if (isset($_SESSION['login_user']))
+						{
+							print	'<ul class="right-nav">';
+							print		'<li><a href="profile.html">ΠΡΟΦΙΛ</a></li>';
+							print		'<li><img src="' . $_SESSION['profile_image'] . '" alt="Profile Image" width="50px" height="50px"></li>';
+							print		'<li><a href="logout.php">ΑΠΟΣΥΝΔΕΣΗ</a></li>';
+							print   	'<div><li><i class="fa-fw fas fa-2x fa-adjust icon" onclick="DarkMode()"></i></li></div>'; 
+							print	'</ul>';
+						}
+						else
+						{
+							print	'<ul class="right-nav">';
+							print		'<li><a href="login.html">ΕΙΣΟΔΟΣ</a></li>';
+							print		'<li><a href="sign-up.html">ΕΓΓΡΑΦΗ</a></li>';
+							print   	'<div><li><i class="fa-fw fas fa-2x fa-adjust icon" onclick="DarkMode()"></i></li></div>';
+							print	'</ul>';
+						}
+					?>
+        </nav>
+
+      </div>
+    </div>
+
+    <div class = "col-12 col-s-12 secondary-pane" id="Body1"> <!--id για το Dark Mode-->
+      <div class="container">
+        <section class="upper-pane">
+          <h2>QUIZ</h2>
+        </section>
+
+        <section class="under-pane">
+            <form name="quiz" id="quiz">
+              <div id="Text"> <!--Άσπρα γράμματα για Dark Mode-->
+                <p>1. Μπορώ να χρησιμοποιώ έναν αλγόριθμο ταξινόμησης για όλες τις περιπτώσεις και να είναι πάντα η βέλτιστη λύση.</p>
+                <p><input type="radio" name="question1" id="question1" value="1a">A. ΣΩΣΤΟ
+                  <input type="radio" name="question1" id="question1" value="1b">Β. ΛΑΘΟΣ
+				</p>
+
+                <p>2. Ποια από τις παρακάτω πολυπλοκότης είναι η πιο βέλτιστη;</p>
+                <p><input type="radio" name="question2" id="question2" value="2a">A. O(n<sup>3</sup>)<br>
+                  <input type="radio" name="question2" id="question2" value="2b">Β. O(nlogn)<br>
+                  <input type="radio" name="question2" id="question2" value="2c">Γ. O(n<sup>2</sup>)<br>
+                  <input type="radio" name="question2" id="question2" value="2d">Δ. O(2<sup>n</sup>)
+				</p>
+
+                <p>3. Για μικρό πλήθος δεδομένων, ποιες απο τις παρακάτω είναι κατάλληλες αν τα δεδομένα ήταν μέχρι έναν βαθμό ταξινομημένα;</p>
+                <p><input type="checkbox" name="question3a" id="question3a" value="3a">A. Bubble Sort<br>
+                  <input type="checkbox" name="question3b" id="question3b" value="3b">Β. Insertion Sort<br>
+                  <input type="checkbox" name="question3c" id="question3c" value="3c">Γ. Selection Sort<br>
+                  <input type="checkbox" name="απαντηση3d" id="question3d" value="3d">Δ. Loukas Sort
+				</p>
+
+                <p>4. Για την Merge Sort, η χειρότερη περίπτωση, για την πολυπλοκότητα της, είναι ________;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="question4" id="question4">
+				</p>
+				
+				<p>5. Δεν μπορώ να χρησιμοποιώ έναν αλγόριθμο ταξινόμησης για όλες τις περιπτώσεις και να είναι πάντα η βέλτιστη λύση.</p>
+                <p>
+					<input type="radio" name="question5" id="question5" value="5a">A. ΣΩΣΤΟ
+					<input type="radio" name="question5" id="question5" value="5b">Β. ΛΑΘΟΣ
+				</p>
+
+                
+				<input class="button button1" type="reset" name="Reset" value="Καθαρισμός">
+                <input class="button button2" type="submit" name="Submit" value="Υποβολή" onClick="checkResults()"><br><br>
+              </div>
+            </form>
+        </section>
+      </div>
+    </div>
+
+    <div class="col-12 col-s-12 footer">
+      <div class="footer-bottom">
+        &copy; Copyright 2021 | MpenakidisLoukas Corpo. | All Rights Reserved
+      </div>
+    </div>
+    
+    <div> <i id="myBtn" class="fas fa-4x fa-angle-double-up" style="font-size:30px" onclick="topFunction()"></i></div> <!--Το κουμπί του Back Top-->
+
+
+	<!--Το responsive navigation bar-->
+    <script>
+      const mobileBtn = document.getElementById('mobile-cta');
+      nav = document.querySelector('nav');
+      mobileBtnExit = document.getElementById('mobile-exit');
+
+      mobileBtn.addEventListener('click', ()=> {
+        nav.classList.add('menu-btn');
+      })
+
+      mobileBtnExit.addEventListener('click', ()=> {
+        nav.classList.remove('menu-btn');
+      })
+
+    </script>
+	
+		<script>
+			function checkResults()
+			{
+				var q1=document.quiz.question1.value;
+				var q2=document.quiz.question2.value;
+				var q3a=document.getElementById("question3a");
+				var q3b=document.getElementById("question3b");
+				var q3c=document.getElementById("question3c");
+				var q3d=document.getElementById("question3d");
+				var q4=document.quiz.question4.value;
+				var q5=document.quiz.question5.value;
+				
+				
+				var c=0;
+				
+				if (q1 == "1b"){
+					c++;
+				}
+				if (q2 == "2b"){
+					c++;
+				}
+				if (q3a.checked == true && q3b.checked == true && q3c.checked == false && q3d.checked == false){
+					c++;
+				}
+				if (q4 == "O(nlogn)"){
+					c++;
+				}
+				if (q5 == "5a"){
+					c++;
+				}
+		
+				if (c==0){
+					alert("Το σκορ σου είναι: " + c + "/5. Διάβασε περισσότερο!");
+				}
+				else if (c>=1 && c<=3){
+					alert("Το σκορ σου είναι: " + c + "/5. Κιάλλο διάβασμα!");
+				}
+				else if (c==4){
+					alert("Το σκορ σου είναι: " + c + "/5. Νταξ, καλά είσαι...");
+				}
+				else if (c==5){
+					alert("Το σκορ σου είναι: " + c + "/5. Καλό.");
+				}
+
+			}
+		</script>
+
+		<!-- Dark Mode-->
+    <script>
+    
+      function DarkMode() {
+        const wasDarkmode = localStorage.getItem('darkmode') === 'true';
+        localStorage.setItem('darkmode', !wasDarkmode);
+  
+        const element = document.getElementById("Body1");
+        const element2 = document.getElementById("Text");
+        element.classList.toggle("dark-mode", !wasDarkmode);
+        element2.classList.toggle("dark-mode", !wasDarkmode);
+        /*const element = document.body;
+        element.classList.toggle('dark-mode', !wasDarkmode);*/
+       } 
+  
+        function onload() {
+        document.getElementById("Body1").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+        document.getElementById("Text").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+        //const element3 = document.getElementById("Dnav");
+        //element3.classList.toggle("darknav");
+        }
+      
+      </script>
+    
+    <style>
+  
+     .dark-mode 
+     {
+       background-color: black;
+       color: white;
+     }
+      .icon 
+      {
+      cursor: pointer;
+      padding-top:13px;
+      padding-left:10px;
+     }
+  
+        /* .darknav{
+          background-color:grey;
+          color: white;
+        }*/
+  
+    /* Κουμπί για το Back Top*/    
+    #myBtn 
+    {
+      display: none; 
+      position: fixed; 
+      bottom: 20px;
+      right: 30px; 
+      z-index: 99; 
+      border: none; 
+      outline: none; 
+      background-color: grey; 
+      color: white; 
+      cursor: pointer; 
+      padding: 15px; 
+      border-radius: 10px; 
+      font-size: 18px; 
+     }
+  
+     #myBtn:hover 
+     {
+       background-color: #555; 
+     }
+     
+    </style>
+  
+    <!--Για το Back too Top-->
+    <script>
+      //Get the button:
+      mybutton = document.getElementById("myBtn");
+  
+     // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {scrollFunction()};
+  
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+  
+  // When the user clicks on the button, scroll to the top of the document
+      function topFunction() 
+      {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
+  </body>
+</html>

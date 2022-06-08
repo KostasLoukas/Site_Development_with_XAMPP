@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+*{ box-sizing: border-box;}
+
+
+
+html, body 
+{
+  height: 100%;
+  background: #F3F2F3;
+  margin: 0;
+  font-family: 'Poppins', 'Play';
+  
+}
+
+/* Customizations on head menu */
+.logo{
+  background: white;
+  padding: 1.1em;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 1.2em;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+}
+
+.button1:hover {background-color: #e7e7e7;}
+
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.button2:hover 
+{
+  background-color: #555555;
+  color: white;
+}
+
+nav 
+{
+  display: none; /* Keeps closed and usable the sidebar */
+  position: fixed;
+  width: 66%;
+  right: 0;
+  top:0;
+  background:#1B1F27;
+  height: 100vh;
+  padding: 1em;
+}
+
+/*
+nav li:hover
+ {
+	background-color: #ffffe1;
+	color: white;
+}
+*/
+
+nav .current { /* bold the specific page index we are in at heads menu */
+  font-weight: bold;
+}
+
+.navbar {  /* Color and padding of "head border" of menu */
+  background: white;
+  padding: 1.2em;
+}
+
+.navbar .container { /* Head menu content ( ΑΡΧΙΚΗ ΠΕΡΙΓΡΑΦΗ ect ) */
+  display: flex;
+  place-content: space-between;
+  background: white;
+}
+
+nav.menu-btn { /* Allows to open sidebar with the click */
+  display: block;
+}
+
+li {  /* Hiding dots of head menu list */
+  display: block;
+}
+
+li a { /* Some customization of contents position */
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin-top: 20px;
+  padding: 1em;
+  font-size: 1.3em;
+  text-align: right;
+}
+
+ul.left-nav{
+  margin:5px;
+}
+ul.right-nav{
+  margin:5px;
+}
+/* ** * * * * ** * *   ** * ** * * ** *** ***/
+
+/* - - -- Core Page Panes - - -- ---*/
+
+/* Prime pane */
+.prime-pane{
+  min-height: 85.5%;
+  text-align: center;
+}
+.prime-pane .upper-pane{
+  min-height: 100%;
+  text-align: center;
+  color: #00338d;
+}
+.prime-pane .under-pane{
+  min-height: 100%;
+  font-size: 1.5em ;
+  text-align: center;
+  color: black;
+}
+
+/* Secondary pane */
+.secondary-pane{
+  min-height: 86%;
+  text-align: justify;
+  font-size: .9em;
+  padding: 0em;
+}
+.secondary-pane .upper-pane{
+  font-size: 1.8em;
+  color: #00338d;
+}
+.secondary-pane .under-pane {
+  font-size: 1.2em;
+}
+.secondary-pane .under-pane .question{
+  font-size: 1.3em;
+  margin-top: 0px;
+}
+.secondary-pane .under-pane .answer{
+  font-size: .9em;
+}
+.secondary-pane .container .upper-pane{
+  font-size: 1.2em;
+}
+
+/* Base font size and position for upper pains*/
+.upper-pane {
+  text-transform: uppercase;
+  font-size: 1.8em;
+  margin-top: .3em;
+}
+/* Base font size and position for under pains*/
+.under-pane{
+  font-size: 1.5em;
+  margin-top: .3em;
+}
+
+section {
+  padding: 2em 2em 0px;
+}
+
+.image_spacer{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.notation_photos{
+  float: left;
+  margin: 10px;
+  padding: 0 20px 20px;
+}
+
+.notation_photos .desc{
+  padding: 2px;
+  text-align: center;
+}
+
+.responsiveimage { 
+    max-width: 100%;
+    height: auto;
+}
+
+.answer img{
+  max-width: 100%;
+  height: auto;
+}
+
+/* ** * * * * ** * *   ** * ** * * ** *** ***/
+
+/* - - -- Side-Popping Menu - - -- ---*/
+.mobile-menu-exit{
+  float: right;
+  margin: .3em;
+  cursor: pointer;
+}
+
+.mobile-menu{
+  cursor: pointer;
+}
+/* ** * * * * ** * *   ** * ** * * ** *** ***/
+
+/* - - -- Footer - - -- ---*/
+.footer {
+  background: #1f232c;
+  color: white;
+
+}
+
+.footer .footer-content {
+  height : 105vh;
+}
+
+.footer .footer-bottom{
+  background:#22252e;
+  height: 66px;
+  width: 100%;
+  text-align: center;
+  position:bottom;
+  font-size: 0.9em;
+  padding-top: 20px;
+}
+/* ** * * * * ** * *   ** * ** * * ** *** ***/
+
+
+[class="col-"]
+{
+    width: 100%;
+}
+
+/* Tablet */
+@media screen and (min-width:700px){
+  .col-s-1 {width: 8.33%; }
+  .col-s-2 {width: 16.66%; }
+  .col-s-3 {width: 25%; }
+  .col-s-4 {width: 33.33%; }
+  .col-s-5 {width: 41.66%; }
+  .col-s-6 {width: 50%; }
+  .col-s-7 {width: 58.33%; }
+  .col-s-8 {width: 66.66%; }
+  .col-s-9 {width: 75%; }
+  .col-s-10 {width: 83.33%; }
+  .col-s-11 {width: 91.66%; }
+  .col-s-12 {width: 100%; }
+
+  /* Font sizes */
+  .prime-pane .upper-pane {
+  text-transform: uppercase;
+  font-size: 2.2em;
+  margin-top: .3em;
+  }
+  .prime-pane .under-pane{
+    font-size: 1.9em;
+    margin-top: .3em;
+  }
+  .secondary-pane .under-pane{
+    font-size: 1.3em;
+    margin-top: 0px;
+  }
+  .secondary-pane .under-pane .question{
+    font-size: 1.5em;
+    margin-top: 0px;
+  }
+  .secondary-pane .under-pane .answer{
+    font-size: 1.1em;
+  }
+  .secondary-pane .container .upper-pane{
+    font-size: 1.5em;
+  }
+  .answer img{
+    max-width: 100%;
+    margin:40px;
+    height: auto;
+  }
+
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px)
+{
+  .col-1 {width: 8.33%; }
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%; }
+  .col-4 {width: 33.33%; }
+  .col-5 {width: 41.66%; }
+  .col-6 {width: 50%; }
+  .col-7 {width: 58.33%; }
+  .col-8 {width: 66.66%; }
+  .col-9 {width: 75%; }
+  .col-10 {width: 83.33%; }
+  .col-11 {width: 91.66%; }
+  .col-12 {width: 100%; }
+
+  /* Font sizes */
+  .prime-pane .upper-pane {
+    text-transform: uppercase;
+    font-size: 2.2em;
+    margin-top: .3em;
+  }
+  .prime-pane .under-pane{
+    font-size: 1.9em;
+    margin-top: .3em;
+  }
+  .secondary-pane .under-pane{
+    font-size: 1.5em;
+    margin-top: 0px;
+  }
+  .secondary-pane .under-pane .question{
+    font-size: 1.5em;
+    margin-top: 0px;
+  }
+  .secondary-pane .under-pane .answer{
+    font-size: 1.1em;
+  }
+  .secondary-pane .container .upper-pane{
+    font-size: 1.5em;
+  }
+
+  .mobile-menu, .mobile-menu-exit{  /* Hides menu and menu-exit buttons until we reach to width limit*/
+    display:none;
+  }
+
+  .navbar .container{ /* Head menu container customizations */
+    display: grid;
+    grid-template-columns: 267px auto; /* Space of left nav from logo */
+    justify-content: unset;
+    margin:6px;
+  }
+  
+  .navbar nav{ /* Space between left nav and right nav at head menu*/
+    display:flex;
+    justify-content: space-between;
+    background: none;
+    position: unset;
+    height: auto;
+    width: 100%;
+    padding: 0;
+  }
+  
+  .navbar nav ul { /* To display items from our two navs of head menu horizontally */
+    display: flex;
+  }
+
+  .navbar nav a{
+    color: black;
+    font-size: 1em;
+    padding: 0em 1em;
+  }
+  .answer img{
+    float: right;
+    margin: 40px;
+  }
+
+  rdm-cont{
+    padding:100px;
+  }
+
+  .rdm-cont .rdm-cont1{
+    background-color: yellow;
+    display: table-cell;
+    width: 100%;
+  }
+  .rdm-cont .rdm-cont2{
+    background-color: orange;
+    display: table-cell;
+    width: 100%;
+    height: 7em;
+  }
+  .rdm-cont .rdm-cont3{
+    background-color: green;
+    display: table-cell;
+    width: 100%;
+
+  }
+}
+

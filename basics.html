@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<?php
+	//session_start();
+	include("login.php");
+  ?>
+
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/d4e63b1e35.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αλγόριθμοι Ταξινόμησης</title>
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+
+  <body onload="onload()">
+    <div class="col-12 col-s-12 navbar">
+      <div class="container">
+        <a class="logo" href="index.html">Αλγόριθμοι Ταξινόμησης</a>
+
+        <img id="mobile-cta" class="mobile-menu" src="media/images_used/menu.svg" alt="Open navigation menu">
+
+        <nav>
+          <img id="mobile-exit" class="mobile-menu-exit" src="media/images_used/exit.svg" alt="Close navigation menu">
+          <ul class="left-nav">
+            <li><a href="index.html">ΑΡΧΙΚΗ</a></li>
+            <li class="current"><a href="basics.html">ΠΕΡΙΓΡΑΦΗ</a></li>
+            <li><a href="more.html">ΠΕΡΙΣΣΟΤΕΡΑ</a></li>
+            <li><a href="quiz.html">QUIZ</a></li>
+            <?php
+              if (isset($_SESSION['login_user']))
+              {
+                echo '<li><a href="extraquiz.html">EXTRA QUIZ!</a></li>';
+              }
+            ?>
+          </ul>
+          <?php
+            if (isset($_SESSION['login_user']))
+            {
+              print	'<ul class="right-nav">';
+              print		'<li><a href="profile.html">ΠΡΟΦΙΛ</a></li>';
+              print		'<li><img src="' . $_SESSION['profile_image'] . '" alt="Profile Image" width="50px" height="50px"></li>';
+              print		'<li><a href="logout.php">ΑΠΟΣΥΝΔΕΣΗ</a></li>';
+              print   '<div><li><i class="fa-fw fas fa-2x fa-adjust icon" onclick="DarkMode()"></i></li></div>'; 
+              print	'</ul>';
+            }
+            else
+            {
+              print	'<ul class="right-nav">';
+              print		'<li><a href="login.html">ΕΙΣΟΔΟΣ</a></li>';
+              print		'<li><a href="sign-up.html">ΕΓΓΡΑΦΗ</a></li>';
+              print   '<div><li><i class="fa-fw fas fa-2x fa-adjust icon" onclick="DarkMode()"></i></li></div>';
+              print	'</ul>';
+            }
+          ?>
+        </nav>
+      </div>
+    </div>
+
+    <div class = "col-12 col-s-12 secondary-pane" id="Body1"> <!--id για το Dark Mode-->
+      <div class="container">
+
+        <section class="upper-pane">
+          <h2>ΠΕΡΙΓΡΑΦΗ</h2>
+        </section>
+
+        <section class="under-pane">
+          <div id="Text"> <!--Άσπρα γράμματα για Dark Mode-->
+            <p class="question">&bull; Τι είναι αλγόριθμος και τι αλγόριθμος ταξινόμησης; </p>
+            
+            <p class="answer"><img src="media/images_used/sort.png" alt="sort_ex">&nbsp;&nbsp;&nbsp;<br>
+              - Ένας αλγόριθμος είναι μια συγκεκριμένη διαδικασία για την επίλυση ενός καλά καθορισμένου υπολογιστικού προβλήματος. Η ανάπτυξη και η ανάλυση των αλγορίθμων είναι θεμελιώδους σημασίας για όλες τις πτυχές της επιστήμης των υπολογιστών: τεχνητή νοημοσύνη, βάσεις δεδομένων, γραφικά, δικτύωση, λειτουργικά συστήματα, ασφάλεια κ.ο.κ
+              Συνήθως τα δεδομένα αυτά είναι της μορφής αριθμών αλλά και γραμμάτων.<br>
+              Ο αλγόριθμος ταξινόμησης είναι ένας αλγόριθμος που τοποθετεί δεδομένα σε μία συγκεκριμένη σειρά, μέσα σε μία λίστα. 
+            </p>
+
+            <p class="question">&bull; Γιατί απετούμε αυτοί οι αλγόριθμοι να είναι αποτελεσματικοί; </p>
+
+            <p class="answer"><img src="media/images_used/google_maps_logo.png" width=150 height= 150 alt="google_maps_logo">&nbsp;&nbsp;&nbsp;<br>
+              - Οι αποτελεσματικοί αλγόριθμοι είναι σημαντικοί όταν ασχολούνται με μεγάλες ποσότητες δεδομένων. Κάτι που μεγαλώνει εκθετικά θα μεγαλώσει απίστευτα γρήγορα. Όσο υψηλότερος είναι ο εκθέτης τόσο πιο γρήγορη είναι η ανάπτυξη. Όταν ασχολείστε με δισεκατομμύρια δίσκους, αυτό αρχίζει να έχει σημασία.<br>
+
+              Μερικά πολύ απλά παραδείγματα που μπορείς να παρατηρήσεις διαφορές είναι στα:<br>
+              - Πώς νιώθεις όταν μια ιστοσελίδα χρειάζεται 5-6 δευτερόλεπτα για την φόρτωση αντί για 1-2 δευτερόλεπτα; ή<br>
+
+              - Τι θα λέγατε αν οι Χάρτες της Google χρειάστηκαν 20-30 δευτερόλεπτα για να βρουν την καλύτερη διαδρομή αντί για 5-10 δευτερόλεπτα;
+            </p>
+
+            <p class="question">&bull; Πως μπορούμε να συγκρίνουμε ποιος αλγόριθμος ταξινόμησης είναι πιο αποτελεσματικός από κάποιον άλλον; </p>
+
+            <p class="answer">&nbsp;&nbsp;&nbsp;
+              - Αν υποθέσουμε ότι και οι δύο αλγόριθμοι χρησιμοποιούν τα ίδια δεδομένα σαν είσοδο, στην γενική ιδέα οι δύο πιο σημαντικοί παράγοντες είναι ο χρόνος εκτέλεσης, ο χώρος που χρειάζεται ο αλγόριθμος να εκμεταλευτεί για να εκτελεστεί και αν τα δεδομένα που μας δίνουν είναι ταξινομημένα. Όμως στο επίπεδο του μαθήματος μας νοιάζει μόνο ο χρόνος εκτέλεσης και ο τρόπος που μας έχουν δώσει τα δεδομένα.<br>
+
+              Για να καταφέρουμε λοιπόν να συγκρίνουμε εύκολα και γρήγορα ποιος αλγόριθμος είναι πιο αποτελεσματικός από άλλους, έχουν ορίσει κάποια μαθηματικά εργαλεία που ονομάζονται notations. Τα πιο χρήσιμα για εμάς, είναι τα:  <strong>O</strong>, <strong>Ω</strong>, <strong>Θ</strong>, που προφέρονται Big Oh notation, Omega notation και Theta notation αντίστοιχα. Αυτά τα notations τα σημπληρωνουμε με συνταρτήσεις, πχ O(n<sup>2</sup>). <br/>
+
+              Το O(n<sup>2</sup>) σημαίνει ότι το "το πάνω όριο" αυτού του αλγορίθμου, όπου σε αυτή την περίπτωση είναι το n<sup>2</sup>, είναι η χειρότερη περίπτωση χρόνου που μπορεί να πάρει αυτός ο αλγόριθμος. Δηλαδή όσο μεγάλη και να είναι η είσοδος που μας δίνουν, δεν θα ξεπερνάει το n<sup>2</sup>. 
+              Αντοίστοιχα, το Ω δείχνει ποια είναι η καλύτερη περίπτωση που μπορούμε να έχουμε με αυτόν τον αλγόριθμο και το Θ μας δείνχνει και το πάνω και το κάτω όριο. <br>
+
+              <br>Από κάτω έχουμε τρεις γραφικές αναπαραστάσεις των τριων notations (Ο ,Ω και Θ αντιστοιχα), και θεωρούμε μια f(n) για να ελέγξουμε σε ποια από τα τρια notations ανήκει:
+            <br>
+            </p>
+
+            <div class="image_spacer" >
+              <img class="notation_photos" src="media/images_used/big_o_notation.jpg" alt="big_Oh_notation_graph">
+              <img class="notation_photos" src="media/images_used/omega_notation.jpg" alt="Omega_notation_graph">
+              <img class="notation_photos" src="media/images_used/theta_notation.jpg" alt="Theta_notation_graph">
+            </div>
+
+            <p class="answer">Όπου,<br>
+              &nbsp;&nbsp;&nbsp;(α) Ο(f(n)) = { g(n) : υπάρχει c > 0 και n0 τέτοιο ώστε f(n) ≤ c*g(n) για κάθε n > n0. }<br>
+              &nbsp;&nbsp;&nbsp;(β) Ω(f(n)) ≥ { g(n) : υπάρχει c > 0 και n0 τέτοιο ώστε g(n) ≤ c*f(n) για κάθε n > n0. }<br>
+              &nbsp;&nbsp;&nbsp;(γ) Θ(f(n)) = { g(n) αν και μόνο αν g(n) =  Ο(f(n)) και g(n) = Ω(f(n)) για κάθε > n0. }<br>
+            </p>
+
+            <p class="question">&bull; Ποια είναι η σειρά πολυπλοκότητας από την πιο γρήγορη προς την πιο αργή; </p>
+
+            <p class="answer">&nbsp;&nbsp;&nbsp;
+                - Οι παρακάτω είναι οι πιο συνηθισμένες πολυπλοκότητες που παρατηρούνται μαζί με ένα γράφημα που τις περιέχει όλες μαζί: <br> &nbsp;&nbsp;&nbsp;
+                O(1) < O(logn) < O(n) < O(nlogn) < O(n<sup>2</sup>) < O(n<sup>3</sup>) < O(2<sup>n</sup>) < O(n!) 
+                <br>
+            </p>
+
+            <div class="image_spacer">
+              <img class="notation_photos responsiveimage" src="media/images_used/big-o-running-time-complexity1.jpg" alt="big_o_running_time_complexity_graph1">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="col-12 col-s-12 footer">
+      <div class="footer-bottom">
+        &copy; Copyright 2021 | MpenakidisLoukas Corpo. | All Rights Reserved
+      </div>
+    </div>
+
+    <div> <i id="myBtn" class="fas fa-4x fa-angle-double-up" style="font-size:30px" onclick="topFunction()"></i></div> <!--Το κουμπί του Back Top-->
+
+
+	  <!--Το responsive navigation bar-->
+    <script>
+      const mobileBtn = document.getElementById('mobile-cta');
+      nav = document.querySelector('nav');
+      mobileBtnExit = document.getElementById('mobile-exit');
+
+      mobileBtn.addEventListener('click', ()=> {
+        nav.classList.add('menu-btn');
+      })
+
+      mobileBtnExit.addEventListener('click', ()=> {
+        nav.classList.remove('menu-btn');
+      })
+    </script>
+
+    <!-- Dark Mode-->
+    <script>
+    
+      function DarkMode() {
+        const wasDarkmode = localStorage.getItem('darkmode') === 'true';
+        localStorage.setItem('darkmode', !wasDarkmode);
+  
+        const element = document.getElementById("Body1");
+        const element2 = document.getElementById("Text");
+        element.classList.toggle("dark-mode", !wasDarkmode);
+        element2.classList.toggle("dark-mode", !wasDarkmode);
+        /*const element = document.body;
+        element.classList.toggle('dark-mode', !wasDarkmode);*/
+       } 
+  
+        function onload() {
+        document.getElementById("Body1").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+        document.getElementById("Text").classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
+        //const element3 = document.getElementById("Dnav");
+        //element3.classList.toggle("darknav");
+        }
+      
+      </script>
+    
+    <style>
+  
+     .dark-mode 
+     {
+       background-color: black;
+       color: white;
+     }
+      .icon 
+      {
+      cursor: pointer;
+      padding-top:13px;
+      padding-left:10px;
+     }
+  
+        /* .darknav{
+          background-color:grey;
+          color: white;
+        }*/
+  
+    /* Κουμπί για το Back Top*/    
+    #myBtn 
+    {
+      display: none; 
+      position: fixed; 
+      bottom: 20px;
+      right: 30px; 
+      z-index: 99; 
+      border: none; 
+      outline: none; 
+      background-color: grey; 
+      color: white; 
+      cursor: pointer; 
+      padding: 15px; 
+      border-radius: 10px; 
+      font-size: 18px; 
+    }
+  
+     #myBtn:hover 
+     {
+       background-color: #555; 
+     }
+    </style>
+  
+    <script>
+      //Get the button:
+      mybutton = document.getElementById("myBtn");
+
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {scrollFunction()};
+
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() 
+      {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
+  </body>
+</html>
