@@ -1,4 +1,4 @@
-#Site Development with XAMPP
+# Site Development with XAMPP
 
 This site was developed entirely from scratch (only the CSS was used as-is), with the help of our trusty Notepad++. :)
 To run this as intended, you will need to have XAMPP installed in your machine and drag-'n'-drop all the files (except from
